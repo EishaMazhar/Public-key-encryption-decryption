@@ -27,14 +27,19 @@ def get_file_message():
         p = s.post(LOGIN_URL, data=payload)
         page = s.get(FILE_ACCESS_URL)
 
-    file_message = page.content.decode("utf-8")
+    file_message = page.content
+
+    my_file = open("message.txt","w")
+    my_file.write(file_message.decode("utf-8"))
+    my_file.close()
+
+    # file_message = page.content.decode("utf-8")
     return file_message
 
 if __name__ == '__main__':
     print("=======================================")
     print(" Fetching Message from Slate")
     print("=======================================")
-    
     start = start_time()
     file_message = get_file_message()
     end = end_time()
